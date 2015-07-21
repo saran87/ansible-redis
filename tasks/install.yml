@@ -48,7 +48,7 @@
          creates=/usr/local/src/redis-{{ redis_version }}
 
 - name: compile redis
-  command: make -j5
+  command: make -j{{ ansible_processor_cores }}
            chdir=/usr/local/src/redis-{{ redis_version }}
            creates=/usr/local/src/redis-{{ redis_version }}/src/redis-server
 
