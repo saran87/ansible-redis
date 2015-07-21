@@ -1,5 +1,5 @@
 ---
-- name: install dependencies
+- name: install dependencies (Debian family)
   apt: pkg={{ item }} update_cache=yes cache_valid_time=86400 state=present
   with_items:
     - gcc
@@ -7,14 +7,14 @@
     - libc6-dev
   when: ansible_os_family == "Debian"
 
-- name: install dependencies
+- name: install dependencies (RedHat family)
   yum: name={{ item }} state=present
   with_items:
     - gcc
     - make
   when: ansible_os_family == "RedHat"
 
-- name: install dependencies
+- name: install dependencies (SuSE family)
   zypper: name={{ item }} state=present
   with_items:
     - gcc
