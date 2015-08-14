@@ -1,0 +1,14 @@
+[Unit]
+Description="Start Redis Server"
+After=network.target
+
+[Service]
+Type=simple
+User={{ redis_user }}
+PIDFile={{ redis_pidfile }}
+ExecStart={{ redis_install_dir }}/bin/redis-server {{ redis_conf_file }}
+ExecStop=/bin/kill -s TERM $MAINPID
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

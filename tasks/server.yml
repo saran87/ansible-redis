@@ -15,16 +15,20 @@
       - default/redis.init.j2
       paths:
         - ../templates
-  when: redis_as_service
- 
+  when: redis_as_service and not use_systemd
+
+- name: create redis systemd service
+  template: src="../templates/redis.service.j2" dest=/etc/systemd/system/{{ redis_service_name }}
+  when: redis_as_service and use_systemd
+
 - name: set redis to start at boot
   service: name=redis_{{ redis_port }} enabled=yes
   when: redis_as_service
-   
+
 - name: check if log file exists
   stat: path={{ redis_logfile }}
   register: logfile_stat
-  
+
 - name: ensure pidfile directory exists and has correct owner
   file: path={{ redis_pidfile|dirname }}
         owner={{ redis_user }}
@@ -47,7 +51,7 @@
   when: logfile_stat.stat.exists == False and redis_logfile != '""'
 
 - name: create redis config file
-  template: src=redis.conf.j2 dest=/etc/redis/{{ redis_port }}.conf
+  template: src=redis.conf.j2 dest={{ redis_conf_file }}
             owner={{ redis_user }}
   notify: restart redis
 
@@ -69,5 +73,5 @@
   meta: flush_handlers
 
 - name: ensure redis is running
-  service: name=redis_{{ redis_port }} state=started
+  service: name={{ redis_service_name }} state=started
   when: redis_as_service
