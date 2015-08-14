@@ -16,7 +16,7 @@ fi
 
 REDIS_USER={{ redis_user }}
 PIDFILE={{ redis_pidfile }}
-CONF="/etc/redis/${REDIS_PORT}.conf"
+CONF={{ redis_conf_file }}
 EXEC={{ redis_install_dir }}/bin/redis-server
 CLIEXEC={{ redis_install_dir }}/bin/redis-cli
 

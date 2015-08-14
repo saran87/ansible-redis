@@ -45,6 +45,7 @@ redis_syslog_facility: USER
 ## General configuration
 redis_daemonize: "yes"                                                          
 redis_pidfile: /var/run/redis/{{ redis_port }}.pid
+redis_conf_file: /etc/redis/{{ redis_port }}.conf
 # Number of databases to allow
 redis_databases: 16
 redis_loglevel: notice
