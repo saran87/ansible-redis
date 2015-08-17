@@ -1,5 +1,7 @@
 [Unit]
 Description="Start Redis Server"
+Wants=disable-thp.service
+After=disable-thp.service
 After=network.target
 
 [Service]
