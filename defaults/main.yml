@@ -11,8 +11,8 @@ redis_nofile_limit: 16384
 # This creates the init scripts for Redis and ensures the process is running
 # Also applies for Redis Sentinel
 redis_as_service: true
-redis_service_name: redis_{redis_port}
-use_systemd: false
+redis_service_name: redis_{{redis_port}}
+use_systemd: true
 
 ## Networking/connection options
 redis_bind: 0.0.0.0
@@ -40,7 +40,7 @@ redis_repl_backlog_size: false
 redis_logfile: '""'                                                             
 # Enable syslog. "yes" or "no"                                                  
 redis_syslog_enabled: "yes"                                                     
-redis_syslog_ident: redis_{{ redis_port }}                                      
+redis_syslog_ident: redis_{{ redis_port }}
 # Syslog facility. Must be USER or LOCAL0-LOCAL7                                
 redis_syslog_facility: USER   
 
