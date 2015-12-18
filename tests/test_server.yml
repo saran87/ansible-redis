@@ -5,6 +5,7 @@
       http_proxy: http://httpproxy.amicillc.com:8080
       https_proxy: http://httpproxy.amicillc.com:8080
   vars:
-    - redis_version: 3.0.5
+    - redis_travis_ci: true
+      redis_version: 3.0.5
   roles:
     - role: ansible-redis
